@@ -1,0 +1,135 @@
+services:
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+    depends_on:
+      - zookeeper
+    networks:
+      - application
+
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - application
+
+  postgresql:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - application
+
+  liquibase-migrations:
+    image: liquibase/liquibase:4.25
+    depends_on:
+      - postgresql
+    command:
+      - --changelog-file=changelog-master.yaml
+      - --driver=org.postgresql.Driver
+      - --url=jdbc:postgresql://postgresql:5432/postgres
+      - --username=postgres
+      - --password=postgres
+      - update
+    volumes:
+      - ./liquibase:/liquibase/changelog
+    networks:
+      - application
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - application
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - application
+
+  service-filtering:
+    image: filtering
+    ports:
+      - "8081:8080"
+    depends_on:
+    #пока не добавил "condition", сервисы падали с ошибкой:
+    #2024-06-16 01:20:23 22:20:23.595 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+    #2024-06-16 01:20:23 org.postgresql.util.PSQLException: Connection to postgresql:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+      postgresql:
+        condition: service_started
+      liquibase-migrations:
+        condition: service_completed_successfully
+      kafka:
+        condition: service_started
+    networks:
+      - application
+
+  service-deduplication:
+    image: deduplication
+    ports:
+      - "8082:8080"
+    depends_on:
+      postgresql:
+        condition: service_started
+      liquibase-migrations:
+        condition: service_completed_successfully
+      redis:
+        condition: service_started
+      kafka:
+        condition: service_started
+    networks:
+      - application
+
+  service-enrichment:
+    image: enrichment
+    ports:
+      - "8083:8080"
+    depends_on:
+      postgresql:
+        condition: service_started
+      liquibase-migrations:
+        condition: service_completed_successfully
+      kafka:
+        condition: service_started
+      mongo:
+        condition: service_started
+    networks:
+      - application
+
+  service-management:
+    image: management
+    ports:
+      - "8084:8080"
+    depends_on:
+      postgresql:
+        condition: service_started
+      liquibase-migrations:
+        condition: service_completed_successfully
+    networks:
+      - application
+
+networks:
+  application: { }

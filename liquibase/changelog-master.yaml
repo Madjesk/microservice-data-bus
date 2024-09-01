@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/deduplication-rules.sql
+  - include:
+      file: db/changelog/changeset/enrichment-rules.sql
+  - include:
+      file: db/changelog/changeset/filter-rules.sql
+  - include:
+      file: db/changelog/changeset/fill/fill-filter-rules.sql

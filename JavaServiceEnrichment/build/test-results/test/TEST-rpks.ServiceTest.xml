@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="rpks.ServiceTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2024-04-28T13:45:32" hostname="MacBook-Air-Klim.local" time="506.039">
+  <properties/>
+  <testcase name="testServiceEnrichmentOneRule()" classname="rpks.ServiceTest" time="63.451"/>
+  <testcase name="testKafkaWriteReadMessage()" classname="rpks.ServiceTest" time="48.839"/>
+  <testcase name="testServiceEnrichmentDefaultValue()" classname="rpks.ServiceTest" time="34.689"/>
+  <testcase name="testServiceEnrichmentActualRule()" classname="rpks.ServiceTest" time="35.449"/>
+  <testcase name="testServiceEnrichmentUpdateRule()" classname="rpks.ServiceTest" time="56.971"/>
+  <testcase name="testStartPostgreSQL()" classname="rpks.ServiceTest" time="30.291"/>
+  <testcase name="testMongoReadWriteValues()" classname="rpks.ServiceTest" time="29.644"/>
+  <testcase name="testPostgreSQLReadValues()" classname="rpks.ServiceTest" time="31.432"/>
+  <testcase name="testServiceEnrichmentTwoRules()" classname="rpks.ServiceTest" time="37.285"/>
+  <testcase name="testServiceEnrichmentNoRules()" classname="rpks.ServiceTest" time="38.18"/>
+  <testcase name="testServiceEnrichmentActualDocument()" classname="rpks.ServiceTest" time="34.998"/>
+  <testcase name="testStartKafka()" classname="rpks.ServiceTest" time="31.947"/>
+  <testcase name="testStartMongoDB()" classname="rpks.ServiceTest" time="32.835"/>
+  <system-out><![CDATA[16:45:30,701 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.4.5
+16:45:30,817 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+16:45:30,849 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/klimbarabanov/Desktop/JavaServiceEnrichment/build/resources/test/logback.xml]
+16:45:30,855 |-WARN in ch.qos.logback.classic.util.DefaultJoranConfigurator@614df0a4 - Resource [logback.xml] occurs multiple times on the classpath.
+16:45:30,855 |-WARN in ch.qos.logback.classic.util.DefaultJoranConfigurator@614df0a4 - Resource [logback.xml] occurs at [file:/Users/klimbarabanov/Desktop/JavaServiceEnrichment/build/resources/test/logback.xml]
+16:45:30,855 |-WARN in ch.qos.logback.classic.util.DefaultJoranConfigurator@614df0a4 - Resource [logback.xml] occurs at [file:/Users/klimbarabanov/Desktop/JavaServiceEnrichment/build/resources/main/logback.xml]
+16:45:31,590 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
+16:45:31,590 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+16:45:31,729 |-WARN in ch.qos.logback.core.ConsoleAppender[CONSOLE] - This appender no longer admits a layout as a sub-component, set an encoder instead.
+16:45:31,729 |-WARN in ch.qos.logback.core.ConsoleAppender[CONSOLE] - To ensure compatibility, wrapping your layout in LayoutWrappingEncoder.
+16:45:31,729 |-WARN in ch.qos.logback.core.ConsoleAppender[CONSOLE] - See also http://logback.qos.ch/codes.html#layoutInsteadOfEncoder for details
+16:45:31,730 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [ru.mai.lessons.rpks] to INFO
+16:45:31,742 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting additivity of logger [ru.mai.lessons.rpks] to false
+16:45:31,744 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[ru.mai.lessons.rpks]
+16:45:31,746 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org] to ERROR
+16:45:31,746 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting additivity of logger [org] to false
+16:45:31,746 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[org]
+16:45:31,746 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [tc] to ERROR
+16:45:31,746 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting additivity of logger [tc] to false
+16:45:31,746 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[tc]
+16:45:31,746 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [com] to ERROR
+16:45:31,746 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting additivity of logger [com] to false
+16:45:31,746 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[com]
+16:45:31,746 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
+16:45:31,746 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[ROOT]
+16:45:31,747 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@1fdf1c5 - End of configuration.
+16:45:31,748 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@2d96543c - Registering current configuration as safe fallback point
+
+16:46:19.778 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:46:19.918 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:46:20.564 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:46:21.147 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:46:21.234 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:46:21.239 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:46:22.148 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:46:23.525 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:46:23.949 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:46:24.967 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:46:25.663 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value
+16:46:25.876 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:46:25.884 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e5331c4f6ad63f3a8909f, testFieldString=testString, testFieldNumeric=1, testFieldArray=[1], testFieldObject=Document{{testInnerFieldString=testInnerString}}, condition_field_in_mongo=condition_value}}
+16:46:25.884 [Test worker] INFO  rpks.ServiceTest - Start test service enrichment
+16:46:26.032 [pool-1-thread-1] INFO  rpks.ServiceTest - Replace test config by container values
+16:46:26.037 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=alex, age=18, sex=M, enrichmentField=null, enrichmentOtherField=null)
+16:46:27.326 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=no_alex, age=19, sex=F, enrichmentField=null, enrichmentOtherField=null)
+16:46:30.385 [pool-1-thread-2] INFO  rpks.ServiceTest - Start reading messages from kafka
+16:46:30.486 [pool-1-thread-2] INFO  rpks.ServiceTest - Remaining attempts 10
+16:46:31.588 [pool-1-thread-2] INFO  rpks.ServiceTest - Remaining attempts 9
+16:46:32.645 [pool-1-thread-2] INFO  rpks.ServiceTest - Read messages 2
+16:46:32.663 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:46:32.659 [pool-1-thread-1] ERROR r.m.l.rpks.impl.ServiceEnrichment - java.lang.InterruptedException
+org.apache.kafka.common.errors.InterruptException: java.lang.InterruptedException
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.maybeThrowInterruptException(ConsumerNetworkClient.java:535)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:296)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:251)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1307)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1243)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1216)
+	at ru.mai.lessons.rpks.impl.KafkaReaderImpl.processing(KafkaReaderImpl.java:43)
+	at ru.mai.lessons.rpks.impl.ServiceEnrichment.start(ServiceEnrichment.java:32)
+	at rpks.ServiceTest.lambda$testStartService$29(ServiceTest.java:917)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.InterruptedException: null
+	... 13 common frames omitted
+16:47:16.963 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:47:17.015 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:47:17.020 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:47:17.031 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:47:17.053 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:47:17.056 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:47:17.101 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:47:18.390 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:47:18.396 [Test worker] INFO  rpks.ServiceTest - Bootstrap.servers: PLAINTEXT://localhost:61393
+16:47:18.396 [Test worker] INFO  rpks.ServiceTest - Sending message
+16:47:18.524 [Test worker] INFO  rpks.ServiceTest - Sent message
+16:47:18.525 [Test worker] INFO  rpks.ServiceTest - Consumer subscribe
+16:47:18.525 [Test worker] INFO  rpks.ServiceTest - Consumer start reading
+16:47:18.525 [Test worker] INFO  rpks.ServiceTest - Start reading messages from kafka
+16:47:18.626 [Test worker] INFO  rpks.ServiceTest - Remaining attempts 10
+16:47:19.731 [Test worker] INFO  rpks.ServiceTest - Remaining attempts 9
+16:47:20.835 [Test worker] INFO  rpks.ServiceTest - Remaining attempts 8
+16:47:21.939 [Test worker] INFO  rpks.ServiceTest - Remaining attempts 7
+16:47:22.942 [Test worker] INFO  rpks.ServiceTest - Read messages 1
+16:47:22.943 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:47:51.605 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:47:51.658 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:47:51.661 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:47:51.672 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:47:51.679 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:47:51.680 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:47:51.729 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:47:52.787 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:47:52.791 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:47:52.804 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:47:52.811 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value
+16:47:52.862 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:47:52.869 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e5388c4f6ad63f3a890a3, testFieldString=testString, testFieldNumeric=1, testFieldArray=[1], testFieldObject=Document{{testInnerFieldString=testInnerString}}, condition_field_in_mongo=condition_value}}
+16:47:52.869 [Test worker] INFO  rpks.ServiceTest - Start test service enrichment
+16:47:52.870 [pool-4-thread-1] INFO  rpks.ServiceTest - Replace test config by container values
+16:47:52.871 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=alex, age=18, sex=M, enrichmentField=null, enrichmentOtherField=null)
+16:47:53.288 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=no_alex, age=19, sex=F, enrichmentField=null, enrichmentOtherField=null)
+16:47:56.320 [pool-4-thread-2] INFO  rpks.ServiceTest - Start reading messages from kafka
+16:47:56.425 [pool-4-thread-2] INFO  rpks.ServiceTest - Remaining attempts 10
+16:47:57.429 [pool-4-thread-2] INFO  rpks.ServiceTest - Read messages 2
+16:47:57.433 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:47:57.433 [pool-4-thread-1] ERROR r.m.l.rpks.impl.ServiceEnrichment - java.lang.InterruptedException
+org.apache.kafka.common.errors.InterruptException: java.lang.InterruptedException
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.maybeThrowInterruptException(ConsumerNetworkClient.java:535)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:296)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:251)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1307)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1243)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1216)
+	at ru.mai.lessons.rpks.impl.KafkaReaderImpl.processing(KafkaReaderImpl.java:43)
+	at ru.mai.lessons.rpks.impl.ServiceEnrichment.start(ServiceEnrichment.java:32)
+	at rpks.ServiceTest.lambda$testStartService$29(ServiceTest.java:917)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.InterruptedException: null
+	... 13 common frames omitted
+16:48:27.977 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:48:28.021 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:48:28.025 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:48:28.037 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:48:28.051 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:48:28.052 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:48:28.296 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:48:29.308 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:48:29.312 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:48:29.328 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:48:29.335 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:48:29.343 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:48:29.351 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value_other
+16:48:29.406 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:48:29.411 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e53adc4f6ad63f3a890a6, testFieldName=testName, condition_field_in_mongo=condition_value_other}}
+16:48:29.411 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value
+16:48:29.424 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:48:29.430 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e53adc4f6ad63f3a890a7, testFieldString=testString, testFieldNumeric=1, testFieldArray=[1], testFieldObject=Document{{testInnerFieldString=testInnerString}}, condition_field_in_mongo=condition_value}}
+16:48:29.431 [Test worker] INFO  rpks.ServiceTest - Start test service enrichment
+16:48:29.433 [pool-6-thread-1] INFO  rpks.ServiceTest - Replace test config by container values
+16:48:29.434 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=alex, age=18, sex=M, enrichmentField=null, enrichmentOtherField=null)
+16:48:29.864 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=no_alex, age=19, sex=F, enrichmentField=null, enrichmentOtherField=null)
+16:48:32.926 [pool-6-thread-2] INFO  rpks.ServiceTest - Start reading messages from kafka
+16:48:33.018 [pool-6-thread-2] INFO  rpks.ServiceTest - Read messages 2
+16:48:33.022 [pool-6-thread-1] ERROR r.m.l.rpks.impl.ServiceEnrichment - java.lang.InterruptedException
+org.apache.kafka.common.errors.InterruptException: java.lang.InterruptedException
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.maybeThrowInterruptException(ConsumerNetworkClient.java:535)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:296)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:251)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1307)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1243)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1216)
+	at ru.mai.lessons.rpks.impl.KafkaReaderImpl.processing(KafkaReaderImpl.java:43)
+	at ru.mai.lessons.rpks.impl.ServiceEnrichment.start(ServiceEnrichment.java:32)
+	at rpks.ServiceTest.lambda$testStartService$29(ServiceTest.java:917)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.InterruptedException: null
+	... 13 common frames omitted
+16:48:33.022 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:49:03.799 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:49:03.845 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:49:03.849 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:49:03.855 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:49:03.868 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:49:03.871 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:49:03.912 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:49:04.976 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:49:04.981 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:49:04.993 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:49:04.998 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value_other
+16:49:05.047 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:49:05.053 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e53d0c4f6ad63f3a890aa, testFieldName=testName, condition_field_in_mongo=condition_value_other}}
+16:49:05.053 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value
+16:49:05.063 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:49:05.068 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e53d1c4f6ad63f3a890ab, testFieldString=testString, testFieldNumeric=1, testFieldArray=[1], testFieldObject=Document{{testInnerFieldString=testInnerString}}, condition_field_in_mongo=condition_value}}
+16:49:05.069 [Test worker] INFO  rpks.ServiceTest - Start test service enrichment
+16:49:05.070 [pool-8-thread-1] INFO  rpks.ServiceTest - Replace test config by container values
+16:49:05.070 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=alex, age=18, sex=M, enrichmentField=null, enrichmentOtherField=null)
+16:49:05.327 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=no_alex, age=19, sex=F, enrichmentField=null, enrichmentOtherField=null)
+16:49:08.371 [Test worker] INFO  rpks.ServiceTest - Wait until messages processed
+16:49:18.376 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:49:18.390 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:49:18.398 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:49:18.405 [Test worker] INFO  rpks.ServiceTest - Wait until rules updated
+16:49:29.408 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=alex, age=18, sex=M, enrichmentField=null, enrichmentOtherField=null)
+16:49:29.421 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=no_alex, age=19, sex=F, enrichmentField=null, enrichmentOtherField=null)
+16:49:29.435 [pool-8-thread-2] INFO  rpks.ServiceTest - Start reading messages from kafka
+16:49:29.538 [pool-8-thread-2] INFO  rpks.ServiceTest - Read messages 4
+16:49:29.541 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:49:29.541 [pool-8-thread-1] ERROR r.m.l.rpks.impl.ServiceEnrichment - java.lang.InterruptedException
+org.apache.kafka.common.errors.InterruptException: java.lang.InterruptedException
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.maybeThrowInterruptException(ConsumerNetworkClient.java:535)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:296)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:251)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1307)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1243)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1216)
+	at ru.mai.lessons.rpks.impl.KafkaReaderImpl.processing(KafkaReaderImpl.java:43)
+	at ru.mai.lessons.rpks.impl.ServiceEnrichment.start(ServiceEnrichment.java:32)
+	at rpks.ServiceTest.lambda$testStartService$29(ServiceTest.java:917)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.InterruptedException: null
+	... 13 common frames omitted
+16:49:59.165 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:49:59.217 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:49:59.222 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:49:59.230 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:49:59.238 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:49:59.238 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:49:59.305 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:50:00.339 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:50:00.351 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:50:28.987 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:50:29.048 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:50:29.051 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:50:29.061 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:50:29.074 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:50:29.075 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:50:29.098 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:50:30.081 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:50:30.086 [Test worker] INFO  rpks.ServiceTest - Connection mongodb mongodb://localhost:62747
+16:50:30.086 [Test worker] INFO  rpks.ServiceTest - Created mongo db test_db
+16:50:30.168 [Test worker] INFO  rpks.ServiceTest - Created mongo collection test_collection in test_db
+16:50:30.169 [Test worker] INFO  rpks.ServiceTest - Create document
+16:50:30.171 [Test worker] INFO  rpks.ServiceTest - Document created: {"id": 1, "fieldName": "testFieldName", "fieldvValue": "testFieldValue", "fieldBoolean": true, "fieldArrays": ["test1", "test2", "test3"]}
+16:50:30.171 [Test worker] INFO  rpks.ServiceTest - Get collection
+16:50:30.171 [Test worker] INFO  rpks.ServiceTest - Collection: com.mongodb.client.internal.MongoCollectionImpl@7574d4ad
+16:50:30.171 [Test worker] INFO  rpks.ServiceTest - Insert document into collection
+16:50:30.190 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:50:59.679 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:50:59.760 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:50:59.765 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:50:59.769 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:50:59.774 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:50:59.774 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:50:59.854 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:51:00.786 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:51:00.796 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:51:00.869 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:51:00.882 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:51:00.890 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:51:32.292 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:51:32.343 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:51:32.352 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:51:32.365 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:51:32.375 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:51:32.375 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:51:32.406 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:51:33.433 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:51:33.452 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:51:33.512 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:51:33.522 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:51:33.529 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:51:33.537 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value
+16:51:33.591 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:51:33.595 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e5465c4f6ad63f3a890b2, testFieldString=testString, testFieldNumeric=1, testFieldArray=[1], testFieldObject=Document{{testInnerFieldString=testInnerString}}, condition_field_in_mongo=condition_value}}
+16:51:33.595 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value_other
+16:51:33.606 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:51:33.610 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e5465c4f6ad63f3a890b3, testFieldName=testName, condition_field_in_mongo=condition_value_other}}
+16:51:33.610 [Test worker] INFO  rpks.ServiceTest - Start test service enrichment
+16:51:33.611 [pool-13-thread-1] INFO  rpks.ServiceTest - Replace test config by container values
+16:51:33.615 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=alex, age=18, sex=M, enrichmentField=null, enrichmentOtherField=null)
+16:51:34.182 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=no_alex, age=19, sex=F, enrichmentField=null, enrichmentOtherField=null)
+16:51:37.231 [pool-13-thread-2] INFO  rpks.ServiceTest - Start reading messages from kafka
+16:51:37.313 [pool-13-thread-2] INFO  rpks.ServiceTest - Read messages 2
+16:51:37.321 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:51:37.322 [pool-13-thread-1] ERROR r.m.l.rpks.impl.ServiceEnrichment - java.lang.InterruptedException
+org.apache.kafka.common.errors.InterruptException: java.lang.InterruptedException
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.maybeThrowInterruptException(ConsumerNetworkClient.java:535)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:296)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:251)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1307)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1243)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1216)
+	at ru.mai.lessons.rpks.impl.KafkaReaderImpl.processing(KafkaReaderImpl.java:43)
+	at ru.mai.lessons.rpks.impl.ServiceEnrichment.start(ServiceEnrichment.java:32)
+	at rpks.ServiceTest.lambda$testStartService$29(ServiceTest.java:917)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.InterruptedException: null
+	... 13 common frames omitted
+16:52:11.037 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:52:11.120 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:52:11.124 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:52:11.129 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:52:11.135 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:52:11.135 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:52:11.217 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:52:12.250 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:52:12.255 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:52:12.291 [Test worker] INFO  rpks.ServiceTest - Start test service enrichment
+16:52:12.291 [pool-15-thread-1] INFO  rpks.ServiceTest - Replace test config by container values
+16:52:12.292 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=alex, age=18, sex=M, enrichmentField=null, enrichmentOtherField=null)
+16:52:12.599 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=no_alex, age=19, sex=F, enrichmentField=null, enrichmentOtherField=null)
+16:52:15.617 [pool-15-thread-2] INFO  rpks.ServiceTest - Start reading messages from kafka
+16:52:15.717 [pool-15-thread-2] INFO  rpks.ServiceTest - Remaining attempts 10
+16:52:16.728 [pool-15-thread-2] INFO  rpks.ServiceTest - Read messages 2
+16:52:16.732 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:52:16.732 [pool-15-thread-1] ERROR r.m.l.rpks.impl.ServiceEnrichment - java.lang.InterruptedException
+org.apache.kafka.common.errors.InterruptException: java.lang.InterruptedException
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.maybeThrowInterruptException(ConsumerNetworkClient.java:535)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:296)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:251)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1307)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1243)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1216)
+	at ru.mai.lessons.rpks.impl.KafkaReaderImpl.processing(KafkaReaderImpl.java:43)
+	at ru.mai.lessons.rpks.impl.ServiceEnrichment.start(ServiceEnrichment.java:32)
+	at rpks.ServiceTest.lambda$testStartService$29(ServiceTest.java:917)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.InterruptedException: null
+	... 13 common frames omitted
+16:52:47.084 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:52:47.143 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:52:47.149 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:52:47.154 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:52:47.161 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:52:47.161 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:52:47.212 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:52:48.314 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:52:48.317 [Test worker] INFO  rpks.ServiceTest - Create enrichment rule
+16:52:48.334 [Test worker] INFO  rpks.ServiceTest - Check rule from DB
+16:52:48.344 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value
+16:52:48.407 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:52:48.412 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e54b0c4f6ad63f3a890b8, testFieldString=testString1, testFieldNumeric=1, testFieldArray=[1], testFieldObject=Document{{testInnerFieldString=testInnerString1}}, condition_field_in_mongo=condition_value}}
+16:52:48.412 [Test worker] INFO  rpks.ServiceTest - Create and check document in MongoDB by condition condition_field_in_mongo = condition_value
+16:52:48.422 [Test worker] INFO  rpks.ServiceTest - Documents in MongoDB:
+16:52:48.426 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e54b0c4f6ad63f3a890b8, testFieldString=testString1, testFieldNumeric=1, testFieldArray=[1], testFieldObject=Document{{testInnerFieldString=testInnerString1}}, condition_field_in_mongo=condition_value}}
+16:52:48.426 [Test worker] INFO  rpks.ServiceTest - Document: Document{{_id=662e54b0c4f6ad63f3a890b9, testFieldString=testString2, testFieldNumeric=2, testFieldArray=[2], testFieldObject=Document{{testInnerFieldString=testInnerString2}}, condition_field_in_mongo=condition_value}}
+16:52:48.426 [Test worker] INFO  rpks.ServiceTest - Start test service enrichment
+16:52:48.427 [pool-17-thread-1] INFO  rpks.ServiceTest - Replace test config by container values
+16:52:48.427 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=alex, age=18, sex=M, enrichmentField=null, enrichmentOtherField=null)
+16:52:48.776 [Test worker] INFO  rpks.ServiceTest - Send message to kafka TestDataModel(name=no_alex, age=19, sex=F, enrichmentField=null, enrichmentOtherField=null)
+16:52:51.809 [pool-17-thread-2] INFO  rpks.ServiceTest - Start reading messages from kafka
+16:52:51.886 [pool-17-thread-2] INFO  rpks.ServiceTest - Read messages 2
+16:52:51.890 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:52:51.890 [pool-17-thread-1] ERROR r.m.l.rpks.impl.ServiceEnrichment - java.lang.InterruptedException
+org.apache.kafka.common.errors.InterruptException: java.lang.InterruptedException
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.maybeThrowInterruptException(ConsumerNetworkClient.java:535)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:296)
+	at org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:251)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1307)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1243)
+	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1216)
+	at ru.mai.lessons.rpks.impl.KafkaReaderImpl.processing(KafkaReaderImpl.java:43)
+	at ru.mai.lessons.rpks.impl.ServiceEnrichment.start(ServiceEnrichment.java:32)
+	at rpks.ServiceTest.lambda$testStartService$29(ServiceTest.java:917)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.InterruptedException: null
+	... 13 common frames omitted
+16:53:22.861 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:53:22.926 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:53:22.929 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:53:22.935 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:53:22.940 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:53:22.940 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:53:22.981 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:53:23.980 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:53:23.993 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+16:53:55.144 [Test worker] INFO  rpks.ServiceTest - Cretae connection pool
+16:53:55.197 [Test worker] INFO  rpks.ServiceTest - Create admin client
+16:53:55.200 [Test worker] INFO  rpks.ServiceTest - Create consumer
+16:53:55.204 [Test worker] INFO  rpks.ServiceTest - Create producer
+16:53:55.208 [Test worker] INFO  rpks.ServiceTest - Topics: [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)], replica factor 1, partitions 3
+16:53:55.208 [Test worker] INFO  rpks.ServiceTest - Check required topics
+16:53:55.286 [Test worker] INFO  rpks.ServiceTest - Topic not exist. Create topics [(name=test_topic_in, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null), (name=test_topic_out, numPartitions=3, replicationFactor=1, replicasAssignments=null, configs=null)]
+16:53:56.556 [Test worker] INFO  rpks.ServiceTest - Create mongo client
+16:53:56.574 [Test worker] INFO  rpks.ServiceTest - Clear table PostgreSQL
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
